@@ -1,6 +1,6 @@
 {
     "description": "Telemetry PHP API Library",
-    "keywords": ["dashboard", "metrics"],
+    "keywords": ["dashboard", "metrics", "viz"],
     "authors": [
         {
             "name": "Willy Morin",
