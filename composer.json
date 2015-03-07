@@ -26,11 +26,12 @@
         }
     ],
     "require": {
+        "php": ">=5.3.0",
         "telemetry": "*"
     },
     "autoload": {
         "psr-0": {
-            "Milkyway": "src"
+            "MilkyWay": "src"
         }
     }    
 }
