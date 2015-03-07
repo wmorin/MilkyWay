@@ -1,0 +1,15 @@
+{
+    "description": "Telemetry PHP client API",
+    "keywords": ["dashboard", "metrics"],
+    "authors": [
+        {
+            "name": "Willy Morin",
+            "email": "willy.morin@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Milkyway": "src"
+        }
+    }    
+}
