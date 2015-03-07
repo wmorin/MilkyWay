@@ -1,4 +1,5 @@
 {
+    "name": "wmorin/milky-way",
     "description": "Telemetry PHP API Library",
     "keywords": ["dashboard", "metrics", "viz"],
     "authors": [
