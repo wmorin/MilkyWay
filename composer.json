@@ -7,6 +7,27 @@
             "email": "willy.morin@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "telemetry",
+                "version": "0.6.0",
+                "source": {
+                    "url": "https://github.com/telemetryapp/telemetry_php.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "classmap": [""]
+                }
+            },
+            "vendor-alias": "telemetry"
+        }
+    ],
+    "require": {
+        "telemetry": "*"
+    },
     "autoload": {
         "psr-0": {
             "Milkyway": "src"
