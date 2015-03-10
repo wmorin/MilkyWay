@@ -85,16 +85,14 @@ class Video extends AbstractFlow
 
     public function toArray()
     {
-        return array_merge(
-            parent::toArray(),
-            array(
-                'mode'   => $this->getMode(),
-                'mp4'    => $this->getMp4(),
-                'muted'  => $this->getMuted(),
-                'ogg'    => $this->getOgg(),
-                'poster' => $this->getPoster(),
-                'webm'   => $this->getWebm(),
-            )
-        );
+        $a = parent::toArray();
+        $a = $this->addOptional($a, 'mode', $this->getMode());
+        $a = $this->addOptional($a, 'mp4', $this->getMp4());
+        $a = $this->addOptional($a, 'muted', $this->getMuted());
+        $a = $this->addOptional($a, 'ogg', $this->getOgg());
+        $a = $this->addOptional($a, 'poster', $this->getPoster());
+        $a = $this->addOptional($a, 'webm', $this->getWebm());
+
+        return $a;
     }
 }
