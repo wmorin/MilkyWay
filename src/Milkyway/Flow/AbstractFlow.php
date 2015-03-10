@@ -65,16 +65,47 @@ abstract class AbstractFlow implements FlowInterface
         return $this->title;
     }
 
-    public function toArray()
+    protected function addOptional(array $array, $name, $value)
     {
-        return array(
-            'expire'  => $this->getExpiresAt()->getTimestamp(),
-            'opacity' => $this->getOpacity(),
-            'title'   => $this->getTitle(),
-        );
+        return $this->addFieldToArray($array, $name, $value, false);
     }
 
-    static protected function elementsToArray(array $elements)
+    protected function addRequired(array $array, $name, $value)
+    {
+        return $this->addFieldToArray($array, $name, $value, true);
+    }
+
+    protected function addFieldToArray(array $array, $name, $value, $required = false)
+    {
+        if ($required && null === $value) {
+            $e = sprintf('Missing required "%s" field.', $name);
+            throw new \Exception($e);
+        }
+
+        if (null !== $value) {
+            $array[$name] = $value;
+        }
+
+        return $array;
+    }
+
+    public function toArray()
+    {
+        $expire = null;
+
+        if ($this->getExpiresAt() instanceof \DateTime) {
+            $expire = $this->getExpiresAt()->getTimestamp();
+        }
+
+        $a = array();
+        $a = $this->addRequired($a, 'expire', $expire);
+        $a = $this->addRequired($a, 'opacity', $this->getOpacity());
+        $a = $this->addRequired($a, 'title', $this->getTitle());
+
+        return $a;
+    }
+
+    protected static function elementsToArray(array $elements)
     {
         $array = array();
 
