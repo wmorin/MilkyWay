@@ -1,6 +1,6 @@
 <?php
 
-namespace Milkyway\Entity;
+namespace Milkyway\Model;
 
 class Account
 {
