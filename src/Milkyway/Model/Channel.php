@@ -7,7 +7,7 @@ class Channel
     /**
      * Telemetry Channel ID.
      *
-     * @var int
+     * @var string
      */
     protected $id;
 

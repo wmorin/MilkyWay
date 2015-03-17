@@ -7,7 +7,7 @@ class Flow
     /**
      * Flow ID.
      *
-     * @var
+     * @var string
      */
     protected $id;
 

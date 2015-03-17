@@ -7,7 +7,7 @@ class Account
     /**
      * Telemetry Account ID.
      *
-     * @var int
+     * @var string
      */
     protected $id;
 

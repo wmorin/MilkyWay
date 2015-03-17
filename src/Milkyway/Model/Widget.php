@@ -37,14 +37,14 @@ class Widget
     /**
      * Column of the top left of the widget on a board.
      *
-     * @var string
+     * @var int
      */
     protected $column;
 
     /**
      * Row of the top left of the widget on a board.
      *
-     * @var string
+     * @var int
      */
     protected $row;
 
