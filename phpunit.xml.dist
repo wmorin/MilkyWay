@@ -18,7 +18,7 @@
     </testsuites>
     <filter>
         <whitelist>
-            <directory>./src/Milkyway/</directory>
+            <directory>./src/MilkyWay/</directory>
         </whitelist>
     </filter>
 </phpunit>

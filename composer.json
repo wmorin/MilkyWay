@@ -1,11 +1,14 @@
 {
     "name": "wmorin/milky-way",
-    "description": "Telemetry PHP API Library",
+    "type": "library",
+    "description": "MilkyWay is a PHP Library to interact with Telemetry API",
     "keywords": ["dashboard", "metrics", "viz"],
+    "homepage": "https://github.com/wmorin/MilkyWay",
     "authors": [
         {
             "name": "Willy Morin",
-            "email": "willy.morin@gmail.com"
+            "email": "willy.morin@gmail.com",
+            "homepage": "https://github.com/wmorin"
         }
     ],
     "require": {
@@ -13,7 +16,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Milkyway": "src"
+            "MilkyWay": "src"
         }
     }    
 }
