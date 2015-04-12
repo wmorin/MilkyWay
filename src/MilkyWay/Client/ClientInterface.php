@@ -4,5 +4,5 @@ namespace Dashboard\Client;
 
 interface ClientInterface
 {
-    function addUpdate($flowTag, $payload);
+    public function addUpdate(Flow $flow, AbstractFlow $widgetVariant);
 }

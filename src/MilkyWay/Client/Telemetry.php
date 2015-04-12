@@ -2,44 +2,39 @@
 
 namespace MilkyWay\Client;
 
+use MilkyWay\Model\Flow;
+use MilkyWay\Model\WidgetVariant\AbstractFlow;
+
 class Telemetry extends \Telemetry implements ClientInterface
 {
-    const DATA_LIFETIME = 600;
-
     public function __construct($apiKey)
     {
         parent::__construct($apiKey);
     }
 
-    public function addUpdate($flowTag, $payload)
+    public function addUpdate(Flow $flow, AbstractFlow $widgetVariant)
     {
-        $payload = $this->setExpiration($payload);
+        $tag = $flow->getTag();
+        $payload = $this->toArray($widgetVariant);
 
-        parent::addUpdate($flowTag, $payload);
+        parent::addUpdate($tag, $payload);
     }
 
-    public function setExpiration($payload)
+    public function toArray(object $obj)
     {
-        $payload['expires_at'] = time() + self::DATA_LIFETIME;
-
-        return $payload;
-    }
-
-    public function toArray()
-    {
-        $array = json_decode(json_encode($this), true);
+        $array = json_decode(json_encode($obj), true);
 
         return self::array_filter_recursive($array);
     }
 
-    public static function array_filter_recursive($input) 
-    { 
-        foreach ($input as &$value) {
-            if (is_array($value)) { 
-                $value = self::array_filter_recursive($value); 
-            } 
-        } 
-        
-        return array_filter($input); 
+    public static function array_filter_recursive(array $array)
+    {
+        foreach ($array as &$value) {
+            if (is_array($value)) {
+                $value = self::array_filter_recursive($value);
+            }
+        }
+
+        return array_filter($array);
     }
 }
