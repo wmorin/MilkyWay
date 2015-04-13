@@ -2,7 +2,7 @@
 
 namespace MilkyWay\Model;
 
-class Flow
+class Flow implements FlowInterface
 {
     /**
      * Flow ID.
