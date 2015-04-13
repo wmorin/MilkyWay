@@ -2,42 +2,39 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Waterfall extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $color;
+    const DIRECTION_UP = 'up';
+    const DIRECTION_DOWN = 'down';
+    const DIRECTION_LEFT = 'left';
+    const DIRECTION_RIGHT = 'right';
 
     /**
-     * 
-     *
+     * @var string
+     */
+    public $color;
+
+    /**
      * @var Item\WaterfallData[]
      */
-    protected $datas = array();
+    public $data = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $direction;
+    public $direction;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $spread;
+    public $spread;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $valueType;
+    public $value_type;
 
     public function setColor($color)
     {
@@ -51,17 +48,26 @@ class Waterfall extends AbstractFlow
 
     public function addData(Item\WaterfallData $data)
     {
-        $this->datas[] = $data;
+        $this->data[] = $data;
     }
 
     public function getDatas()
     {
-        return $this->datas;
+        return $this->data;
     }
 
     public function setDirection($direction)
     {
-        $this->direction = $direction;
+        switch ($direction) {
+            case self::DIRECTION_DOWN:
+            case self::DIRECTION_LEFT:
+            case self::DIRECTION_RIGHT:
+            case self::DIRECTION_UP:
+                $this->direction = $direction;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getDirection()
@@ -81,11 +87,11 @@ class Waterfall extends AbstractFlow
 
     public function setValueType($type)
     {
-        $this->valueType = $type;
+        $this->value_type = $type;
     }
 
     public function getValueType()
     {
-        return $this->valueType;
+        return $this->value_type;
     }
 }

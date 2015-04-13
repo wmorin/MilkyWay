@@ -2,37 +2,36 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class MultiGauge extends AbstractFlow
 {
+    const LAYOUT_PLAIN = 'plain';
+    const LAYOUT_STACKED = 'stacked';
+
     /**
-     * 
-     *
      * @var string
      */
-    protected $gaugeColor;
+    public $gauge_color;
 
     /**
-     * 
-     *
      * @var Item\Gauge[]
      */
-    protected $gauges = array();
+    public $gauges = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $layout;
+    public $layout;
 
     public function setGaugeColor($color)
     {
-        $this->gaugeColor = $color;
+        $this->gauge_color = $color;
     }
 
     public function getGaugeColor()
     {
-        return $this->gaugeColor;
+        return $this->gauge_color;
     }
 
     public function addGauge(Item\Gauge $gauge)
@@ -45,9 +44,26 @@ class MultiGauge extends AbstractFlow
         return $this->gauges;
     }
 
+    public function setLayoutPlain()
+    {
+        $this->layout = self::LAYOUT_PLAIN;
+    }
+
+    public function setLayoutStacked()
+    {
+        $this->layout = self::LAYOUT_STACKED;
+    }
+
     public function setLayout($layout)
     {
-        $this->layout = $layout;
+        switch ($layout) {
+            case self::LAYOUT_PLAIN:
+            case self::LAYOUT_STACKED:
+                $this->layout = $layout;
+                break;
+            default:
+            throw new MilkywayRuntimeException();
+        }
     }
 
     public function getLayout()

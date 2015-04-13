@@ -2,74 +2,66 @@
 
 namespace MilkyWay\Model\WidgetVariant\Item;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class BulletChart extends AbstractItem
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $colors = array();
+    const RENDERER_LINE = 'line';
+    const RENDERER_DOT = 'dot';
 
     /**
-     * 
-     *
+     * @var string[]
+     */
+    public $colors = array();
+
+    /**
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var int
      */
-    protected $marker;
+    public $marker;
 
     /**
-     * 
-     *
-     * @var 
+     * @var int
      */
-    protected $max;
+    public $max;
 
     /**
-     * 
-     *
-     * @var 
+     * @var int
      */
-    protected $min;
+    public $min;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $renderer;
+    public $renderer;
 
     /**
-     * 
-     *
-     * @var 
+     * @var int[]
      */
-    protected $thresholds = array();
+    public $thresholds = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $value;
+    public $value;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $valueType;
+    public $value_type;
 
     public function addColor($color)
     {
         $this->colors[] = $color;
+    }
+
+    public function setColors(array $colors)
+    {
+        $this->colors = $colors;
     }
 
     public function getColors()
@@ -119,6 +111,15 @@ class BulletChart extends AbstractItem
 
     public function setRenderer($renderer)
     {
+        $availableRenderer = [
+            self::RENDERER_DOT,
+            self::RENDERER_LINE,
+        ];
+
+        if (! in_array($renderer, $availableRenderer)) {
+            throw new MilkywayRuntimeException();
+        }
+
         $this->renderer = $renderer;
     }
 
@@ -130,6 +131,11 @@ class BulletChart extends AbstractItem
     public function addThreshold($threshold)
     {
         $this->thresholds[] = $threshold;
+    }
+
+    public function setThresholds(array $thresholds)
+    {
+        $this->thresholds = $threshold;
     }
 
     public function getThresholds()
@@ -147,13 +153,13 @@ class BulletChart extends AbstractItem
         return $this->value;
     }
 
-    public function setValueType($valueType)
+    public function setValueType($type)
     {
-        $this->valueType = $valueType;
+        $this->value_type = $type;
     }
 
     public function getValueType()
     {
-        return $this->valueType;
+        return $this->value_type;
     }
 }

@@ -4,44 +4,65 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 
 class SerieMetadata extends AbstractItem
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $aggregation;
+    const AGGREGATION_FUNCTION_AVG = 'avg';
+    const AGGREGATION_FUNCTION_MIN = 'min';
+    const AGGREGATION_FUNCTION_MAX = 'max';
+    const AGGREGATION_FUNCTION_SUM = 'sum';
+    const AGGREGATION_FUNCTION_LATEST = 'latest';
 
     /**
-     * 
-     *
+     * @var
+     */
+    public $aggregation;
+
+    /**
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var bool
      */
-    protected $interpolate;
+    public $interpolate;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $valueType;
+    public $value_type;
 
-    public function setAggregation($aggregation)
+    public function setAggregationAvg()
     {
-        $this->aggregation = $aggregation;
+        $this->aggregation = self::AGGREGATION_FUNCTION_AVG;
+    }
+
+    public function setAggregationMin()
+    {
+        $this->aggregation = self::AGGREGATION_FUNCTION_MIN;
+    }
+
+    public function setAggregationMax()
+    {
+        $this->aggregation = self::AGGREGATION_FUNCTION_MAX;
+    }
+
+    public function setAggregationSum()
+    {
+        $this->aggregation = self::AGGREGATION_FUNCTION_SUM;
+    }
+
+    public function setAggregationLatest()
+    {
+        $this->aggregation = self::AGGREGATION_FUNCTION_LATEST;
+    }
+
+    public function setAggregation($function)
+    {
+        $this->aggregation = $function;
     }
 
     public function getAggregation()
@@ -61,7 +82,7 @@ class SerieMetadata extends AbstractItem
 
     public function setInterpolate($interpolate)
     {
-        $this->interpolate = $interpolate;
+        $this->interpolate = (bool) $interpolate;
     }
 
     public function getInterpolate()

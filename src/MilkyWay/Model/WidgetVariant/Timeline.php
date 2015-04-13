@@ -4,12 +4,10 @@ namespace MilkyWay\Model\WidgetVariant;
 
 class Timeline extends AbstractFlow
 {
-	/**
-	 * 
-	 *
-	 * @var Item\TimelineMessage[]
-	 */
-    protected $messages = array();
+    /**
+     * @var Item\TimelineMessage[]
+     */
+    public $messages = array();
 
     public function addMessage(Item\TimelineMessage $message)
     {

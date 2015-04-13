@@ -2,21 +2,22 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Weather extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $location;
+    const TEMPERATURE_CELSIUS = 'celsius';
+    const TEMPERATURE_FAHRENHEIT = 'fahrenheit';
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $temperture;
+    public $location;
+
+    /**
+     * @var string
+     */
+    public $temperture;
 
     public function setLocation($location)
     {
@@ -28,13 +29,20 @@ class Weather extends AbstractFlow
         return $this->location;
     }
 
-    public function setTemperture($temperture)
+    public function setTemperature($temperature)
     {
-        $this->temperture = $temperture;
+        switch ($temperature) {
+            case self::TEMPERATURE_CELSIUS:
+            case self::TEMPERATURE_FAHRENHEIT:
+                $this->temperature = $temperature;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
-    public function getTemperture()
+    public function getTemperature()
     {
-        return $this->temperture;
+        return $this->temperature;
     }
 }

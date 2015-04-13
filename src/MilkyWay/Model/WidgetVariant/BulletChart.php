@@ -5,19 +5,17 @@ namespace MilkyWay\Model\WidgetVariant;
 class BulletChart extends AbstractFlow
 {
     /**
-	 * 
-	 *
-	 * @var Item\BulletChart[]
-	 */
-    protected $bulletCharts = array();
+     * @var Item\BulletChart[]
+     */
+    public $bulletcharts = array();
 
     public function addBulletChartItem(Item\BulletChart $bullet)
     {
-        $this->bulletCharts[] = $bullet;
+        $this->bulletcharts[] = $bullet;
     }
 
     public function getBulletCharts()
     {
-        return $this->bulletCharts;
+        return $this->bulletcharts;
     }
 }

@@ -5,46 +5,34 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Circle extends AbstractItem
 {
     /**
-     * 
-     *
      * @var \Center
      */
-    protected $center;
+    public $center;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $fillColor;
+    public $fill_color;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $lineWidth;
+    public $line_width;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $radius;
+    public $radius;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $strokeColor;
+    public $strokeColor;
 
     public function setCenter(Center $center)
     {
@@ -58,12 +46,12 @@ class Circle extends AbstractItem
 
     public function setFillColor($color)
     {
-        $this->fillColor = $color;
+        $this->fill_color = $color;
     }
 
     public function getFillColor()
     {
-        return $this->fillColor;
+        return $this->fill_color;
     }
 
     public function setLabel($label)
@@ -78,12 +66,12 @@ class Circle extends AbstractItem
 
     public function setLineWidth($width)
     {
-        $this->lineWidth = $width;
+        $this->line_width = $width;
     }
 
     public function getLineWidth()
     {
-        return $this->lineWidth;
+        return $this->line_width;
     }
 
     public function setRadius($radius)
@@ -98,11 +86,11 @@ class Circle extends AbstractItem
 
     public function setStrokeColor($color)
     {
-        $this->strokeColor = $color;
+        $this->stroke_color = $color;
     }
 
     public function getStrokeColor()
     {
-        return $this->strokeColor;
+        return $this->stroke_color;
     }
 }

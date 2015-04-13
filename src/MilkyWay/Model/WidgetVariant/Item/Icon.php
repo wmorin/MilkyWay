@@ -5,25 +5,19 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Icon extends AbstractItem
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $type;
+    public $type;
 
     public function setColor($color)
     {

@@ -2,53 +2,70 @@
 
 namespace MilkyWay\Model\WidgetVariant\Item;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Cell extends AbstractItem
 {
+    const ALIGNMENT_LEFT = 'left';
+    const ALIGNMENT_RIGHT = 'right';
+    const ALIGNMENT_CENTER = 'center';
+
     /**
-     * 
-     *
      * @var string
      */
-    protected $alignment;
+    public $alignment;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $icon;
+    public $icon;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $sparkline;
+    public $sparkline;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $value;
+    public $value;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $valueType;
+    public $value_type;
+
+    public function alignLeft()
+    {
+        $this->alignment = self::ALIGNMENT_LEFT;
+    }
+
+    public function alignRight()
+    {
+        $this->alignment = self::ALIGNMENT_RIGHT;
+    }
+
+    public function alignCenter()
+    {
+        $this->alignment = self::ALIGNMENT_CENTER;
+    }
 
     public function setAlignment($alignment)
     {
-        $this->alignment = $alignment;
+        switch ($alignment) {
+            case self::ALIGNMENT_LEFT:
+            case self::ALIGNMENT_RIGHT:
+            case self::ALIGNMENT_CENTER:
+                $this->alignment = $alignment;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getAlignment()
@@ -98,11 +115,11 @@ class Cell extends AbstractItem
 
     public function setValueType($type)
     {
-        $this->valueType = $type;
+        $this->value_type = $type;
     }
 
     public function getValueType()
     {
-        return $this->valueType;
+        return $this->value_type;
     }
 }

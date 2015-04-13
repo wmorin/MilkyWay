@@ -5,32 +5,26 @@ namespace MilkyWay\Model\WidgetVariant;
 class UpStatus extends AbstractFlow
 {
     /**
-     * 
-     *
-     * @var 
+     * @var string[]
      */
-    protected $down = array();
+    public $down = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $lastDown;
+    public $last_down;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string[]
      */
-    protected $up = array();
+    public $up = array();
+
+    public $up_color = 'blue';
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $uptime;
+    public $uptime;
 
     public function addDown($down)
     {
@@ -44,15 +38,15 @@ class UpStatus extends AbstractFlow
 
     public function setLastDown($lastDown)
     {
-        $this->lastDown = $lastDown;
+        $this->last_down = $lastDown;
     }
 
     public function getLastDown()
     {
-        return $this->lastDown;
+        return $this->last_down;
     }
 
-    public function setUp($up)
+    public function addUp($up)
     {
         $this->up[] = $up;
     }

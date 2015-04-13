@@ -5,32 +5,24 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Polyline extends AbstractItem
 {
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $lineWidth;
+    public $line_width;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $strokeColor;
+    public $stroke_color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var Vertice[]
      */
-    protected $vertices;
+    public $vertices = array();
 
     public function setLabel($label)
     {
@@ -44,25 +36,30 @@ class Polyline extends AbstractItem
 
     public function setLineWidth($width)
     {
-        $this->lineWidth = $width;
+        $this->line_width = $width;
     }
 
     public function getLineWidth()
     {
-        return $this->lineWidth;
+        return $this->line_width;
     }
 
     public function setStrokeColor($color)
     {
-        $this->strokeColor = $color;
+        $this->stroke_color = $color;
     }
 
     public function getStrokeColor()
     {
-        return $this->strokeColor;
+        return $this->stroke_color;
     }
 
-    public function setVertices(Vertice $vertices)
+    public function addVertice(Vertice $vertice)
+    {
+        $this->vertices[] = $vertice;
+    }
+
+    public function setVertices(array $vertices)
     {
         $this->vertices = $vertices;
     }

@@ -5,18 +5,16 @@ namespace MilkyWay\Model\WidgetVariant;
 class Countdown extends AbstractFlow
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $message;
+    public $message;
 
     /**
-     * 
+     * The UNIX seconds since epoch representing the time.
      *
-     * @var 
+     * @var int
      */
-    protected $time;
+    public $time;
 
     public function setMessage($message)
     {
@@ -28,9 +26,9 @@ class Countdown extends AbstractFlow
         return $this->message;
     }
 
-    public function setTime($time)
+    public function setTime($second)
     {
-        $this->time = $time;
+        $this->time = $second;
     }
 
     public function getTime()

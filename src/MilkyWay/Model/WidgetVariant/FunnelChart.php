@@ -4,12 +4,10 @@ namespace MilkyWay\Model\WidgetVariant;
 
 class FunnelChart extends AbstractFlow
 {
-	/**
-	 * 
-	 *
-	 * @var Item\FunnelValue[]
-	 */
-    protected $values = array();
+    /**
+     * @var Item\FunnelValue[]
+     */
+    public $values = array();
 
     public function addValue(Item\FunnelValue $value)
     {

@@ -11,7 +11,7 @@ class Bar extends AbstractItem
      *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
      * Label.
@@ -20,7 +20,7 @@ class Bar extends AbstractItem
      *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
      * Value.
@@ -30,7 +30,7 @@ class Bar extends AbstractItem
      *
      * @var int
      */
-    protected $value;
+    public $value;
 
     public function setColor($color)
     {

@@ -2,88 +2,71 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Value extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $abbreviate;
+    const DELTA_TYPE_ABSOLUTE = 'absolute';
+    const DELTA_TYPE_PERCENT = 'percent';
 
     /**
-     * 
-     *
-     * @var 
+     * @var bool
      */
-    protected $color;
+    public $abbreviate;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $delta;
+    public $color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $deltaType;
+    public $delta;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $icon;
+    public $delta_type;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $label;
+    public $icon;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $labelColor;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $rounding;
+    public $label_color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $sparkline = array();
+    public $rounding;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float[]
      */
-    protected $value;
+    public $sparkline = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $valueType;
+    public $value;
+
+    /**
+     * @var string
+     */
+    public $value_type;
 
     public function setAbbreviate($abbreviate)
     {
-        $this->abbreviate = $abbreviate;
+        $this->abbreviate = (bool) $abbreviate;
     }
 
     public function getAbbreviate()
@@ -113,12 +96,19 @@ class Value extends AbstractFlow
 
     public function setDeltaType($type)
     {
-        $this->deltaType = $type;
+        switch ($type) {
+            case self::DELTA_TYPE_ABSOLUTE:
+            case self::DELTA_TYPE_PERCENT:
+                $this->delta_type = $type;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getDeltaType()
     {
-        return $this->deltaType;
+        return $this->delta_type;
     }
 
     public function setIcon($icon)
@@ -143,12 +133,12 @@ class Value extends AbstractFlow
 
     public function setLabelColor($color)
     {
-        $this->labelColor = $color;
+        $this->label_color = $color;
     }
 
     public function getLabelColor()
     {
-        return $this->labelColor;
+        return $this->label_color;
     }
 
     public function setRounding($rounding)
@@ -183,11 +173,11 @@ class Value extends AbstractFlow
 
     public function setValueType($type)
     {
-        $this->valueType  = $type;
+        $this->value_type  = $type;
     }
 
     public function getValueType()
     {
-        return $this->valueType;
+        return $this->value_type;
     }
 }

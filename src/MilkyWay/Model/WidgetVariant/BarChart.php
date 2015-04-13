@@ -11,32 +11,37 @@ class BarChart extends AbstractFlow
      *
      * @var Bar[]
      */
-    protected $bars = array();
+    public $bars = array();
 
     /**
      * The max possible value of the bar.
      *
      * @var int
      */
-    protected $max;
+    public $max;
 
     /**
      * The min possible value of the bar.
      *
      * @var int
      */
-    protected $min;
+    public $min;
 
     /**
      * Whether to sort the bars by value or not. The default is true.
      *
      * @var boolean
      */
-    protected $sort = true;
+    public $sort = true;
 
     public function addBar(Bar $bar)
     {
         $this->bars[] = $bar;
+    }
+
+    public function setBars(array $bars)
+    {
+        $this->bars = $bars;
     }
 
     public function getBars()
@@ -66,7 +71,7 @@ class BarChart extends AbstractFlow
 
     public function setSort($sort)
     {
-        $this->sort = $sort;
+        $this->sort = (bool) $sort;
     }
 
     public function getSort()

@@ -2,60 +2,71 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Timeseries extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $baseline;
+    const BASELINE_DYNAMIC = 'dynamic';
+    const BASELINE_ZERO = 'zero';
+
+    const INTERVAL_SECONDS = 'seconds';
+    const INTERVAL_MINUTES = 'minutes';
+    const INTERVAL_HOURS = 'hours';
+    const INTERVAL_DAYS = 'days';
+    const INTERVAL_WEEKS = 'weeks';
+    const INTERVAL_MONTHS = 'months';
+    const INTERVAL_YEARS = 'years';
+
+    const RENDERER_AREA = 'area';
+    const RENDERER_BAR = 'bar';
+    const RENDERER_LINE = 'line';
+    const RENDERER_SPLINE = 'spline';
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $interval;
+    public $baseline;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $intervalCount;
+    public $interval;
 
     /**
-     * 
-     *
-     * @var 
+     * @var int
      */
-    protected $renderer;
+    public $interval_count;
 
     /**
-     * 
-     *
+     * @var string
+     */
+    public $renderer;
+
+    /**
      * @var Item\SerieMetadata[]
      */
-    protected $seriesMetadata = array();
+    public $series_metadata = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var int
      */
-    protected $timestamp;
+    public $timestamp;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float[]
      */
-    protected $values = array();
+    public $values = array();
 
     public function setBaseline($baseline)
     {
-        $this->baseline = $baseline;
+        switch ($baseline) {
+            case self::BASELINE_DYNAMIC:
+            case self::BASELINE_ZERO:
+                $this->baseline = $baseline;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getBaseline()
@@ -65,7 +76,19 @@ class Timeseries extends AbstractFlow
 
     public function setInterval($interval)
     {
-        $this->interval = $interval;
+        switch ($interval) {
+            case self::INTERVAL_SECONDS:
+            case self::INTERVAL_MINUTES:
+            case self::INTERVAL_HOURS:
+            case self::INTERVAL_DAYS:
+            case self::INTERVAL_WEEKS:
+            case self::INTERVAL_MONTHS:
+            case self::INTERVAL_YEARS:
+                $this->interval = $interval;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getInterval()
@@ -85,7 +108,16 @@ class Timeseries extends AbstractFlow
 
     public function setRenderer($renderer)
     {
-        $this->renderer = $renderer;
+        switch ($renderer) {
+            case self::RENDERER_AREA:
+            case self::RENDERER_BAR:
+            case self::RENDERER_LINE:
+            case self::RENDERER_SPLINE:
+                $this->renderer = $renderer;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getRenderer()
@@ -105,7 +137,7 @@ class Timeseries extends AbstractFlow
 
     public function setTimestamp(\DateTime $dateTime)
     {
-        $this->timestamp = $dateTime;
+        $this->timestamp = $dateTime->getTimestamp();
     }
 
     public function getTimestamp()

@@ -5,64 +5,48 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Value extends AbstractItem
 {
     /**
-     * 
-     *
-     * @var 
+     * @var bool
      */
-    protected $abbreviate;
+    public $abbreviate;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $icon;
+    public $icon;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $labelColor;
+    public $label_color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var int
      */
-    protected $rounding;
+    public $rounding;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $value;
+    public $value;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $valueType;
+    public $value_type;
 
     public function setAbbreviate($abbreviate)
     {
-        $this->abbreviate = $abbreviate;
+        $this->abbreviate = (bool) $abbreviate;
     }
 
     public function getAbbreviate()
@@ -102,17 +86,17 @@ class Value extends AbstractItem
 
     public function setLabelColor($labelColor)
     {
-        $this->labelColor = $labelColor;
+        $this->label_color = $labelColor;
     }
 
     public function getLabelColor()
     {
-        return $this->labelColor;
+        return $this->label_color;
     }
 
-    public function setRounding($rounding)
+    public function setRounding($decimalCount)
     {
-        $this->rounding = $rounding;
+        $this->rounding = $decimalCount;
     }
 
     public function getRounding()
@@ -132,11 +116,11 @@ class Value extends AbstractItem
 
     public function setValueType($type)
     {
-        $this->valueType = $type;
+        $this->value_type = $type;
     }
 
     public function getValueType()
     {
-        return $this->valueType;
+        return $this->value_type;
     }
 }

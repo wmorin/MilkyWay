@@ -4,14 +4,12 @@ namespace MilkyWay\Model\WidgetVariant;
 
 class MultiValue extends AbstractFlow
 {
-	/**
-	 * 
-	 *
-	 * @var Item\Gauge[]
-	 */
-    protected $values = array();
+    /**
+     * @var Item\Value[]
+     */
+    public $values = array();
 
-    public function addValue(Item\Gauge $value)
+    public function addValue(Item\Value $value)
     {
         $this->values[] = $value;
     }

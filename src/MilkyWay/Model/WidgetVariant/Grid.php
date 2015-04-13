@@ -4,20 +4,18 @@ namespace MilkyWay\Model\WidgetVariant;
 
 class Grid extends AbstractFlow
 {
-	/**
-	 * 
-	 *
-	 * @var Item\GridData[]
-	 */
-    protected $datas = array();
+    /**
+     * @var Item\GridData[]
+     */
+    public $data = array();
 
     public function addData(Item\GridData $data)
     {
-        $this->datas[] = $data;
+        $this->data[] = $data;
     }
 
     public function getDatas()
     {
-        return $this->datas;
+        return $this->data;
     }
 }

@@ -5,32 +5,24 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Server extends AbstractItem
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string[]
      */
-    protected $labels = array();
+    public $labels = array();
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $name;
+    public $name;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float[]
      */
-    protected $values = array();
+    public $values = array();
 
     public function setColor($color)
     {
@@ -45,6 +37,11 @@ class Server extends AbstractItem
     public function addLabel($label)
     {
         $this->labels[] = $label;
+    }
+
+    public function setLabels(array $labels)
+    {
+        $this->labels = $labels;
     }
 
     public function getLabels()
@@ -65,6 +62,11 @@ class Server extends AbstractItem
     public function addValue($value)
     {
         $this->values[] = $value;
+    }
+
+    public function setValues(array $values)
+    {
+        $this->values = $values;
     }
 
     public function getValues()

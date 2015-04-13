@@ -4,26 +4,23 @@ namespace MilkyWay\Model\WidgetVariant;
 
 class Compass extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $heading;
+    const RENDERER_GAUGE = 'gauge';
+    const RENDERER_HEADING = 'heading';
 
     /**
-     * 
-     *
-     * @var string
+     * @var float
      */
-    protected $label;
+    public $heading;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $renderer;
+    public $label;
+
+    /**
+     * @var string
+     */
+    public $renderer;
 
     public function setHeading($heading)
     {
@@ -43,6 +40,16 @@ class Compass extends AbstractFlow
     public function getLabel()
     {
         return $this->label;
+    }
+
+    public function renderAsGauge()
+    {
+        $this->renderer = self::RENDERER_GAUGE;
+    }
+
+    public function renderAsHeading()
+    {
+        $this->renderer = self::RENDERER_HEADING;
     }
 
     public function setRenderer($renderer)

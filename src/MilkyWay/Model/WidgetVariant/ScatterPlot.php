@@ -5,32 +5,24 @@ namespace MilkyWay\Model\WidgetVariant;
 class ScatterPlot extends AbstractFlow
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float[]
      */
-    protected $values = array();
+    public $values = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $xLabel;
+    public $x_label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $yLabel;
+    public $y_label;
 
     public function setColor($color)
     {
@@ -42,9 +34,9 @@ class ScatterPlot extends AbstractFlow
         return $this->color;
     }
 
-    public function addValue($value)
+    public function addValues(array $values)
     {
-        $this->values[] = $value;
+        $this->values[] = $values;
     }
 
     public function getValues()
@@ -52,23 +44,23 @@ class ScatterPlot extends AbstractFlow
         return $this->values;
     }
 
-    public function setXLabel($xLabel)
+    public function setXLabel($label)
     {
-        $this->xLabel = $xLabel;
+        $this->x_label = $label;
     }
 
     public function getXLabel()
     {
-        return $this->xLabel;
+        return $this->x_label;
     }
 
-    public function setYLabel($yLabel)
+    public function setYLabel($label)
     {
-        $this->yLabel = $yLabel;
+        $this->y_label = $label;
     }
 
     public function getYLabel()
     {
-        return $this->yLabel;
+        return $this->y_label;
     }
 }

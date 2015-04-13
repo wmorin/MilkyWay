@@ -5,32 +5,24 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class TimelineMessage extends AbstractItem
 {
     /**
-     * 
-     *
-     * @var 
-     */
-    protected $from;
-
-    /**
-     * 
-     *
      * @var string
      */
-    protected $iconUrl;
+    public $from;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $text;
+    public $icon_url;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $timeStamp;
+    public $text;
+
+    /**
+     * @var int
+     */
+    public $timestamp;
 
     public function setFrom($from)
     {
@@ -44,12 +36,12 @@ class TimelineMessage extends AbstractItem
 
     public function setIconUrl($url)
     {
-        $this->iconUrl = $url;
+        $this->icon_url = $url;
     }
 
     public function getIconUrl()
     {
-        return $this->iconUrl;
+        return $this->icon_url;
     }
 
     public function setText($text)
@@ -64,11 +56,11 @@ class TimelineMessage extends AbstractItem
 
     public function setTimeStamp(\DateTime $dateTime)
     {
-        $this->timeStamp = $dateTime;
+        $this->timestamp = $dateTime->getTimeStamp();
     }
 
     public function getTimeStamp()
     {
-        return $this->timeStamp;
+        return $this->timestamp;
     }
 }

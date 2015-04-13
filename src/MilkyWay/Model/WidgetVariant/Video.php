@@ -2,53 +2,55 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Video extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $mode;
+    const MODE_FILL = 'fill';
+    const MODE_FIT = 'fit';
+    const MODE_SCALE = 'scale';
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $mp4;
+    public $mode;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $muted;
+    public $mp4;
 
     /**
-     * 
-     *
-     * @var 
+     * @var bool
      */
-    protected $ogg;
+    public $muted;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $poster;
+    public $ogg;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $webm;
+    public $poster;
+
+    /**
+     * @var string
+     */
+    public $webm;
 
     public function setMode($mode)
     {
-        $this->mode = $mode;
+        switch ($mode) {
+            case self::MODE_FILL:
+            case self::MODE_FIT:
+            case self::MODE_SCALE:
+                $this->mode = $mode;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getMode()
@@ -68,7 +70,7 @@ class Video extends AbstractFlow
 
     public function setMuted($muted)
     {
-        $this->muted = $muted;
+        $this->muted = (bool) $muted;
     }
 
     public function getMuted()

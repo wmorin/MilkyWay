@@ -4,12 +4,10 @@ namespace MilkyWay\Model\WidgetVariant;
 
 class Box extends AbstractFlow
 {
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-    protected $color;
+    /**
+     * @var string
+     */
+    public $color;
 
     public function setColor($color)
     {

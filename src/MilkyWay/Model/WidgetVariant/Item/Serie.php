@@ -5,25 +5,19 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Serie extends AbstractItem
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float[]
      */
-    protected $values = array();
+    public $values = array();
 
     public function setColor($color)
     {

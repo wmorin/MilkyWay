@@ -5,18 +5,14 @@ namespace MilkyWay\Model\WidgetVariant;
 class Clock extends AbstractFlow
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var \DateTimeZone
+     * @var string
      */
-    protected $timeZone;
+    public $timezone;
 
     public function setLabel($label)
     {
@@ -30,11 +26,11 @@ class Clock extends AbstractFlow
 
     public function setTimeZone(\DateTimeZone $timeZone)
     {
-        $this->timeZone = $timeZone;
+        $this->timezone = $timeZone->getName();
     }
 
     public function getTimeZone()
     {
-        return $this->timeZone;
+        return $this->timezone;
     }
 }

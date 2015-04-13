@@ -5,58 +5,33 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class GridData extends AbstractItem
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $backgroundColor;
+    public $bg_color;
 
     /**
-     * 
-     *
+     * @var float
+     */
+    public $fill;
+
+    /**
      * @var string
      */
-    protected $color;
+    public $fill_color;
 
     /**
-     * 
-     *
-     * @var 
-     */
-    protected $fill;
-
-    /**
-     * 
-     *
      * @var string
      */
-    protected $fillColor;
-
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $label;
+    public $label;
 
     public function setBackgroundColor($color)
     {
-        $this->backgroundColor = $color;
+        $this->bg_color = $color;
     }
 
     public function getBackgroundColor()
     {
-        return $this->backgroundColor;
-    }
-
-    public function setColor($color)
-    {
-        $this->color = $color;
-    }
-
-    public function getColor()
-    {
-        return $this->color;
+        return $this->bg_color;
     }
 
     public function setFill($fill)
@@ -71,12 +46,12 @@ class GridData extends AbstractItem
 
     public function setFillColor($color)
     {
-        $this->fillColor = $color;
+        $this->fill_color = $color;
     }
 
     public function getFillColor()
     {
-        return $this->fillColor;
+        return $this->fill_color;
     }
 
     public function setLabel($label)

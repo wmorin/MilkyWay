@@ -2,28 +2,28 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Image extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $link;
+    const MODE_FILL = 'fill';
+    const MODE_FIT = 'fit';
+    const MODE_SCALE = 'scale';
 
     /**
-     * 
-     *
-     * @var 
-     */
-    protected $mode;
-
-    /**
-     * 
-     *
      * @var string
      */
-    protected $url;
+    public $link;
+
+    /**
+     * @var string
+     */
+    public $mode;
+
+    /**
+     * @var string
+     */
+    public $url;
 
     public function setLink($link)
     {
@@ -35,9 +35,32 @@ class Image extends AbstractFlow
         return $this->link;
     }
 
+    public function setModeFill()
+    {
+        $this->mode = self::MODE_FILL;
+    }
+
+    public function setModeFit()
+    {
+        $this->mode = self::MODE_FIT;
+    }
+
+    public function setModeScale()
+    {
+        $this->mode = self::MODE_SCALE;
+    }
+
     public function setMode($mode)
     {
-        $this->mode = $mode;
+        switch ($mode) {
+            case self::MODE_FILL:
+            case self::MODE_FIT:
+            case self::MODE_SCALE:
+                $this->mode = $mode;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getMode()

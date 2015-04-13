@@ -5,18 +5,14 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Status extends AbstractItem
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     public function setColor($color)
     {

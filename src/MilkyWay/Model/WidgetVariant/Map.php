@@ -4,54 +4,44 @@ namespace MilkyWay\Model\WidgetVariant;
 
 class Map extends AbstractFlow
 {
+    const TYPE_DARK = 'dark';
+    const TYPE_LIGHT = 'light';
+    const TYPE_SATELLITE = 'satellite';
+
     /**
-     * 
-     *
      * @var Item\Circle[]
      */
-    protected $circles = array();
+    public $circles = array();
 
     /**
-     * 
-     *
      * @var Item\Coord[]
      */
-    protected $coords = array();
+    public $coords = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $mapboxId;
+    public $mapbox_id;
 
     /**
-     * 
-     *
      * @var Item\Marker[]
      */
-    protected $markers = array();
+    public $markers = array();
 
     /**
-     * 
-     *
      * @var Item\Polygon[]
      */
-    protected $polygons = array();
+    public $polygons = array();
 
     /**
-     * 
-     *
      * @var Item\Polyline[]
      */
-    protected $polylines = array();
+    public $polylines = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $type;
+    public $type;
 
     public function addCircle(Item\Circle $circle)
     {
@@ -63,9 +53,9 @@ class Map extends AbstractFlow
         return $this->circles;
     }
 
-    public function addCoord(Item\Coord $coord)
+    public function setCoord(Item\Coord $coord)
     {
-        $this->coords[] = $coord;
+        $this->coords = $coord;
     }
 
     public function getCoords()
@@ -75,15 +65,15 @@ class Map extends AbstractFlow
 
     public function setMapBoxId($id)
     {
-        $this->mapboxId = $id;
+        $this->mapbox_id = $id;
     }
 
     public function getMapboxId()
     {
-        return $this->mapboxId;
+        return $this->mapbox_id;
     }
 
-    public function setMarkers(Item\Marker $marker)
+    public function addMarker(Item\Marker $marker)
     {
         $this->markers[] = $marker;
     }
@@ -93,7 +83,7 @@ class Map extends AbstractFlow
         return $this->markers;
     }
 
-    public function setPolygons(Item\Polygon $polygon)
+    public function addPolygon(Item\Polygon $polygon)
     {
         $this->polygons[] = $polygon;
     }
@@ -103,7 +93,7 @@ class Map extends AbstractFlow
         return $this->polygons;
     }
 
-    public function setPolylines(Item\Polyline $polyLine)
+    public function addPolyline(Item\Polyline $polyLine)
     {
         $this->polylines[] = $polyLine;
     }
@@ -113,9 +103,33 @@ class Map extends AbstractFlow
         return $this->polylines;
     }
 
+    public function SetTypeDark()
+    {
+        $this->type = self::TYPE_DARK;
+    }
+
+    public function SetTypeSatellite()
+    {
+        $this->type = self::TYPE_SATELLITE;
+    }
+
+    public function SetTypeLight()
+    {
+        $this->type = self::TYPE_LIGHT;
+    }
+
     public function setType($type)
     {
-        $this->type = $type;
+        switch ($type) {
+            case self::TYPE_DARK:
+            case self::TYPE_SATELLITE:
+            case self::TYPE_LIGHT:
+                $this->type = $type;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+                break;
+        }
     }
 
     public function getType()

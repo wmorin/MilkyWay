@@ -2,39 +2,49 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Text extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $alignment;
+    const SIZE_SMALL = 'small';
+    const SIZE_NORMAL = 'normal';
+    const SIZE_LARGE = 'large';
+
+    const ALIGNMENT_LEFT = 'left';
+    const ALIGNMENT_RIGHT = 'right';
+    const ALIGNMENT_CENTER = 'center';
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $alignment;
 
     /**
-     * 
-     *
-     * @var 
-     */
-    protected $size;
-
-    /**
-     * 
-     *
      * @var string
      */
-    protected $text;
+    public $color;
+
+    /**
+     * @var string
+     */
+    public $size;
+
+    /**
+     * @var string
+     */
+    public $text;
 
     public function setAlignment($alignment)
     {
-        $this->alignment = $alignment;
+        switch ($alignment) {
+            case self::ALIGNMENT_CENTER:
+            case self::ALIGNMENT_LEFT:
+            case self::ALIGNMENT_RIGHT:
+                $this->alignment = $alignment;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getAlignment()
@@ -54,7 +64,15 @@ class Text extends AbstractFlow
 
     public function setSize($size)
     {
-        $this->size = $size;
+        switch ($size) {
+            case self::SIZE_SMALL:
+            case self::SIZE_NORMAL:
+            case self::SIZE_LARGE:
+                $this->size = $size;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getSize()

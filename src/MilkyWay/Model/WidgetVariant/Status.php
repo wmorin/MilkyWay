@@ -4,12 +4,10 @@ namespace MilkyWay\Model\WidgetVariant;
 
 class Status extends AbstractFlow
 {
-	/**
-	 * 
-	 *
-	 * @var Item\Status[]
-	 */
-    protected $statuses = array();
+    /**
+     * @var Item\Status[]
+     */
+    public $statuses = array();
 
     public function addStatus(Item\Status $status)
     {

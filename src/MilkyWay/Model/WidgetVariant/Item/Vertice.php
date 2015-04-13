@@ -5,36 +5,32 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Vertice extends AbstractItem
 {
     /**
-     * 
-     *
      * @var float
      */
-    protected $latitude;
+    public $lat;
 
     /**
-     * 
-     *
      * @var float
      */
-    protected $longitude;
+    public $lon;
 
     public function setLatitude($latitude)
     {
-        $this->latitude = $latitude;
+        $this->lat = $latitude;
     }
 
     public function getLatitude()
     {
-        return $this->latitude;
+        return $this->lat;
     }
 
     public function setLongitude($longitude)
     {
-        $this->longitude = $longitude;
+        $this->lon = $longitude;
     }
 
     public function getLongitude()
     {
-        return $this->longitude;
+        return $this->lon;
     }
 }

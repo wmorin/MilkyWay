@@ -5,18 +5,14 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class WaterfallData extends AbstractItem
 {
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $serial;
+    public $serial;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float[]
      */
-    protected $values = array();
+    public $values = array();
 
     public function setSerial($serial)
     {
@@ -31,6 +27,11 @@ class WaterfallData extends AbstractItem
     public function addValue($value)
     {
         $this->values[] = $value;
+    }
+
+    public function setValues(array $values)
+    {
+        $this->values = $values;
     }
 
     public function getValues()

@@ -2,35 +2,32 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class PieChart extends AbstractFlow
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $colors = array();
+    const RENDERER_PIE = 'pie';
+    const RENDERER_DONUT = 'donut';
 
     /**
-     * 
-     *
-     * @var 
+     * @var string[]
      */
-    protected $labels = array();
+    public $colors = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var string[]
      */
-    protected $renderer;
+    public $labels = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $values = array();
+    public $renderer;
+
+    /**
+     * @var float[]
+     */
+    public $values = array();
 
     public function addColor($color)
     {
@@ -52,9 +49,26 @@ class PieChart extends AbstractFlow
         return $this->labels;
     }
 
+    public function renderAsDonut()
+    {
+        $this->renderer = self::RENDERER_DONUT;
+    }
+
+    public function renderAsPie()
+    {
+        $this->renderer = self::RENDERER_PIE;
+    }
+
     public function setRenderer($renderer)
     {
-        $this->renderer = $renderer;
+        switch ($renderer) {
+            case self::RENDERER_DONUT:
+            case self::RENDERER_PIE:
+                $this->renderer = $renderer;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getRenderer()

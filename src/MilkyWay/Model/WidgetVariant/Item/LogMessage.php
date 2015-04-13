@@ -5,25 +5,19 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class LogMessage extends AbstractItem
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $text;
+    public $text;
 
     /**
-     * 
-     *
-     * @var \DateTime
+     * @var int
      */
-    protected $timestamp;
+    public $timestamp;
 
     public function setColor($color)
     {
@@ -47,7 +41,7 @@ class LogMessage extends AbstractItem
 
     public function setTimestamp(\DateTime $dateTime)
     {
-        $this->timestamp = $dateTime;
+        $this->timestamp = $dateTime->getTimestamp();
     }
 
     public function getTimestamp()

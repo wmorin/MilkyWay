@@ -5,18 +5,14 @@ namespace MilkyWay\Model\WidgetVariant;
 class Tickertape extends AbstractFlow
 {
     /**
-     * 
-     *
-     * @var 
+     * @var string[]
      */
-    protected $messages = array();
+    public $messages = array();
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     public function addMessage($message)
     {

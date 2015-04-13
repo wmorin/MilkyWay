@@ -2,107 +2,86 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Gauge extends AbstractFlow
 {
+    const RENDERER_DOT = 'dot';
+    const RENDERER_LINE = 'line';
+
     /**
-     * 
-     *
      * @var string
      */
-    protected $gaugeColor;
+    public $gauge_color;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $icon;
+    public $icon;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $max;
+    public $max;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $min;
+    public $min;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $range;
+    public $range;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $renderer;
+    public $renderer;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $value;
+    public $value;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $value2;
+    public $value_2;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $value2Color;
+    public $value_2_color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $value2Label;
+    public $value_2_label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $valueColor;
+    public $value_color;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $valueType;
+    public $value_type;
 
     public function setGaugeColor($color)
     {
-        $this->gaugeColor = $color;
+        $this->gauge_color = $color;
     }
 
     public function getGaugeColor()
     {
-        return $this->gaugeColor;
+        return $this->gauge_color;
     }
 
     public function setIcon($icon)
@@ -157,7 +136,14 @@ class Gauge extends AbstractFlow
 
     public function setRenderer($renderer)
     {
-        $this->renderer = $renderer;
+        switch ($renderer) {
+            case self::RENDERER_DOT:
+            case self::RENDERER_LINE:
+                break;
+                $this->renderer = $renderer;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getRenderer()
@@ -177,51 +163,51 @@ class Gauge extends AbstractFlow
 
     public function setValue2($value)
     {
-        $this->value2 = $value;
+        $this->value_2 = $value;
     }
 
     public function getValue2()
     {
-        return $this->value2;
+        return $this->value_2;
     }
 
     public function setValue2color($color)
     {
-        $this->value2Color = $color;
+        $this->value_2_color = $color;
     }
 
     public function getValue2Color()
     {
-        return $this->value2Color;
+        return $this->value_2_color;
     }
 
     public function setValue2Label($label)
     {
-        $this->value2Label = $label;
+        $this->value_2_label = $label;
     }
 
     public function getValue2Label()
     {
-        return $this->value2Label;
+        return $this->value_2_label;
     }
 
     public function setValueColor($color)
     {
-        $this->valueColor = $color;
+        $this->value_color = $color;
     }
 
     public function getValueColor()
     {
-        return $this->valueColor;
+        return $this->value_color;
     }
 
     public function setValueType($type)
     {
-        $this->valueType = $type;
+        $this->value_type = $type;
     }
 
     public function getValueType()
     {
-        return $this->valueType;
+        return $this->value_type;
     }
 }

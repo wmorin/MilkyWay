@@ -5,25 +5,19 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class FunnelValue extends AbstractItem
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
      * @var string
      */
-    protected $label;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $value;
+    public $value;
 
     public function setColor($color)
     {

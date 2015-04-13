@@ -2,60 +2,51 @@
 
 namespace MilkyWay\Model\WidgetVariant\Item;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Gauge extends AbstractItem
 {
-    /**
-     * 
-     *
-     * @var 
-     */
-    protected $icon = array();
+    const RENDERER_DOT = 'dot';
+    const RENDERER_LINE = 'line';
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $label;
+    public $icon;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $max;
+    public $label;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $min;
+    public $max;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $renderer;
+    public $min;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string
      */
-    protected $value;
+    public $renderer;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $valueType;
+    public $value;
 
-    public function addIcon($icon)
+    /**
+     * @var
+     */
+    public $value_type;
+
+    public function setIcon($icon)
     {
-        $this->icon[] = $icon;
+        $this->icon = $icon;
     }
 
     public function getIcons()
@@ -93,9 +84,27 @@ class Gauge extends AbstractItem
         return $this->min;
     }
 
+    public function renderAsDot()
+    {
+        $this->renderer = self::RENDERER_DOT;
+    }
+
+    public function renderAsLine()
+    {
+        $this->renderer = self::RENDERER_LINE;
+    }
+
     public function setRenderer($renderer)
     {
-        $this->renderer = $renderer;
+        switch ($renderer) {
+            case self::RENDERER_DOT:
+            case self::RENDERER_LINE:
+                $this->renderer = $renderer;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+                break;
+        }
     }
 
     public function getRenderer()
@@ -115,11 +124,11 @@ class Gauge extends AbstractItem
 
     public function setValueType($type)
     {
-        $this->valueType = $type;
+        $this->value_type = $type;
     }
 
     public function getValueType()
     {
-        return $this->valueType;
+        return $this->value_type;
     }
 }

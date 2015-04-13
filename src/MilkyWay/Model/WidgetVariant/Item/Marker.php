@@ -5,32 +5,24 @@ namespace MilkyWay\Model\WidgetVariant\Item;
 class Marker extends AbstractItem
 {
     /**
-     * 
-     *
      * @var string
      */
-    protected $color;
+    public $color;
 
     /**
-     * 
-     *
      * @var MarkerCoord
      */
-    protected $coords;
-    
+    public $coords;
+
     /**
-     * 
-     *
      * @var string
      */
-    protected $icon;
- 
-    /**
-     * 
-     *
-     * @var 
-     */
-   protected $label;
+    public $icon;
+
+   /**
+    * @var string
+    */
+   public $label;
 
     public function setColor($color)
     {

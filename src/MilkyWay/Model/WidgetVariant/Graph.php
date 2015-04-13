@@ -2,109 +2,105 @@
 
 namespace MilkyWay\Model\WidgetVariant;
 
+use MilkyWay\Exception\MilkywayRuntimeException;
+
 class Graph extends AbstractFlow
 {
+    const LABEL_AUTO = 'auto';
+    const LABEL_NONE = 'none';
+
+    const MISSING_DATA_CROP_LEFT = 'crop_left';
+    const MISSING_DATA_CROP_RIGHT = 'crop_right';
+    const MISSING_DATA_FILL = 'fill';
+
+    const BASELINE_DYNAMIC = 'dynamic';
+    const BASELINE_ZERO = 'zero';
+
+    const RENDERER_AREA = 'area';
+    const RENDERER_BAR = 'bar';
+    const RENDERER_LINE = 'line';
+    const RENDERER_SPLINE = 'spline';
+
     /**
-     * 
-     *
      * @var string
      */
-    protected $baseline;
+    public $baseline;
 
     /**
-     * 
-     *
-     * @var 
+     * @var int
      */
-    protected $endTime;
+    public $end_time;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $label1;
+    public $label_1;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $label2;
+    public $label_2;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $label3;
+    public $label_3;
 
     /**
-     * 
-     *
-     * @var 
+     * @var float
      */
-    protected $minScale;
+    public $min_scale;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $missingData;
+    public $missing_data;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $renderer;
+    public $renderer;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $series = array();
+    public $series = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var int
      */
-    protected $startTime;
+    public $start_time;
 
     /**
-     * 
-     *
-     * @var 
+     * @var bool
      */
-    protected $unstack;
+    public $unstack = true;
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $valueType;
+    public $value_type;
 
     /**
-     * 
-     *
-     * @var 
+     * @var string[]
      */
-    protected $xLabels;
+    public $x_labels = array();
 
     /**
-     * 
-     *
-     * @var 
+     * @var
      */
-    protected $yLabels;
+    public $y_labels;
 
     public function setBaseline($baseline)
     {
-        $this->baseline = $baseline;
+        switch ($baseline) {
+            case self::BASELINE_DYNAMIC:
+            case self::BASELINE_ZERO:
+                $this->baseline = $baseline;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getBaseline()
@@ -114,67 +110,84 @@ class Graph extends AbstractFlow
 
     public function setEndTime(\DateTime $dateTime)
     {
-        $this->endTime = $dateTime;
+        $this->end_time = $dateTime->getTimestamp();
     }
 
     public function getEndTime()
     {
-        return $this->endTime;
+        return $this->end_time;
     }
 
     public function setLabel1($label)
     {
-        $this->label1 = $label;
+        $this->label_1 = $label;
     }
 
     public function getLabel1()
     {
-        return $this->label1;
+        return $this->label_1;
     }
 
     public function setLabel2($label)
     {
-        $this->label2 = $label;
+        $this->label_2 = $label;
     }
 
     public function getLabel2()
     {
-        return $this->label2;
+        return $this->label_2;
     }
 
     public function setLabel3($label)
     {
-        $this->label3 = $label;
+        $this->label_3 = $label;
     }
 
     public function getLabel3()
     {
-        return $this->label3;
+        return $this->label_3;
     }
 
     public function setMinScale($scale)
     {
-        $this->minScale = $scale;
+        $this->min_scale = $scale;
     }
 
     public function getMinScale()
     {
-        return $this->minScale;
+        return $this->min_scale;
     }
 
     public function setMissingData($data)
     {
-        $this->missingData = $data;
+        switch ($data) {
+            case self::MISSING_DATA_CROP_LEFT:
+            case self::MISSING_DATA_CROP_RIGHT:
+            case self::MISSING_DATA_FILL:
+                $this->missing_data = $data;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getMissingData()
     {
-        return $this->missingData;
+        return $this->missing_data;
     }
 
     public function setRenderer($renderer)
     {
-        $this->renderer = $renderer;
+        switch ($renderer) {
+            case self::RENDERER_AREA:
+            case self::RENDERER_BAR:
+            case self::RENDERER_LINE:
+            case self::RENDERER_SPLINE:
+                $this->renderer = $renderer;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getRenderer()
@@ -194,17 +207,17 @@ class Graph extends AbstractFlow
 
     public function setStartTime(\DateTime $dateTime)
     {
-        $this->startTime = $dateTime;
+        $this->start_time = $dateTime->getTimestamp();
     }
 
     public function getStartTime()
     {
-        return $this->startTime;
+        return $this->start_time;
     }
 
     public function setUnstack($unstack)
     {
-        $this->unstack = $unstack;
+        $this->unstack = (bool) $unstack;
     }
 
     public function getUnstack()
@@ -214,31 +227,53 @@ class Graph extends AbstractFlow
 
     public function setValueType($type)
     {
-        $this->valueType = $type;
+        $this->value_type = $type;
     }
 
     public function getValueType()
     {
-        return $this->valueType;
+        return $this->value_type;
     }
 
-    public function setXLabels($label)
+    public function addXLabel($label)
     {
-        $this->xLabels = $label;
+        $this->x_labels[] = $label;
+    }
+
+    public function setXLabels(array $labels)
+    {
+        $this->x_labels = $labels;
     }
 
     public function getXLabels()
     {
-        return $this->xLabels;
+        return $this->x_labels;
+    }
+
+    public function setYLabelAuto()
+    {
+        $this->y_labels = self::LABEL_AUTO;
+    }
+
+    public function setYLabelNone()
+    {
+        $this->y_labels = self::LABEL_NONE;
     }
 
     public function setYLabels($label)
     {
-        $this->yLabels = $label;
+        switch ($label) {
+            case self::LABEL_AUTO:
+            case self::LABEL_NONE:
+                $this->y_labels = $label;
+                break;
+            default:
+                throw new MilkywayRuntimeException();
+        }
     }
 
     public function getYLabels()
     {
-        return $this->yLabels;
+        return $this->y_labels;
     }
 }
