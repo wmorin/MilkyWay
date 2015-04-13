@@ -1,8 +1,10 @@
 <?php
 
-namespace Dashboard\Client;
+namespace MilkyWay\Client;
+
+use MilkyWay\Model\FlowInterface;
 
 interface ClientInterface
 {
-    public function addUpdate(Flow $flow, AbstractFlow $widgetVariant);
+    public function updateFlow(FlowInterface $flow, $widgetVariant);
 }
