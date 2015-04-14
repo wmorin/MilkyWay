@@ -4,7 +4,7 @@ namespace MilkyWay\Client;
 
 use MilkyWay\Model\FlowInterface;
 
-class Telemetry implements ClientInterface
+class Milkyway implements ClientInterface
 {
     protected $apiKey;
 

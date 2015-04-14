@@ -7,7 +7,7 @@ A Telemetry PHP API Library.
 Let's put all together:
 
 ```php
-use MilkyWay\Client\Telemetry;
+use MilkyWay\Client\Milkyway;
 use MilkyWay\Model\Flow;
 use MilkyWay\Model\WidgetVariant\Weather;
 
@@ -19,7 +19,7 @@ $weather->setTitle('Current Weather');
 $weather->setLocation('Tokyo, JP');
 $weather->setTemperature(Weather::TEMPERATURE_CELSIUS);
 
-$telemetry = new Telemetry('your-api-key');
-$telemetry->updateFlow($flow, $weather);
-$telemetry->post();
+$client = new Milkyway('your-api-key');
+$client->updateFlow($flow, $weather);
+$client->post();
 ```
