@@ -2,19 +2,59 @@
 
 namespace MilkyWay\Client;
 
+use MilkyWay\Model\Account;
+use MilkyWay\Model\Board;
 use MilkyWay\Model\FlowInterface;
 
 class Milkyway implements ClientInterface
 {
     protected $apiKey;
 
-    protected $apiUrl = 'https://api.telemetryapp.com/data';
+    protected $apiUrl = 'https://api.telemetryapp.com';
 
     protected $updated = array();
 
     public function __construct($apiKey)
     {
         $this->apiKey = $apiKey;
+    }
+
+    public function getAccount()
+    {
+        $obj = $this->getApiResponse('account');
+
+        $account = new Account();
+        $account->setId($obj->id);
+        $account->setName($obj->name);
+        $account->setPlan($obj->plan);
+
+        return $account;
+    }
+
+    public function getBoards()
+    {
+        $obj = $this->getApiResponse('boards');
+
+        $boards = array();
+
+        foreach ($obj as $boardElt) {
+            $board = new Board();
+            $board->setId($boardElt->id);
+            $board->setName($boardElt->name);
+            $board->setTheme($boardElt->theme);
+            $board->setColumns($boardElt->columns);
+            $board->setRows($boardElt->rows);
+            $board->setAspectRatio($boardElt->aspect_ratio);
+            $board->setDisplayBoardName($boardElt->display_board_name);
+            $board->setWidgetMargins($boardElt->widget_margins);
+            $board->setWidgetPadding($boardElt->widget_padding);
+            $board->setSize($boardElt->size);
+            $board->setFontSize($boardElt->font_size);
+
+            array_push($boards, $board);
+        }
+
+        return $boards;
     }
 
     public function post()
@@ -24,14 +64,13 @@ class Milkyway implements ClientInterface
         }
 
         $request = [ 'data' => $this->updates ];
-        $result = $this->getApiResponse($request);
+        $result = $this->getApiResponse('data', $request);
         $this->updates = array();
         $errors = $this->getErrors($result);
 
         if (count($errors)) {
-            //$errors
             print_r($errors);
-            throw new \RuntimeException('plop');
+            throw new \RuntimeException();
         }
     }
 
@@ -40,8 +79,9 @@ class Milkyway implements ClientInterface
         $errors = array();
 
         if (isset($result->message)) {
+            $msg = sprintf('Code: %d - Message: %s', $result->code, $result->message);
             $errors = array(
-                '$fatal' => 'Code: '.$result->code.' - Message: '.$result->message,
+                '$fatal' => $msg,
             ); // Some kind of fatal error occurred.
         }
 
@@ -56,26 +96,31 @@ class Milkyway implements ClientInterface
         return $errors;
     }
 
-    protected function getApiResponse($request)
+    protected function getApiResponse($method, $request = null)
     {
-        $json = json_encode($request, JSON_PRETTY_PRINT);
+        $curl = curl_init($this->apiUrl.'/'.$method);
+        echo $this->apiUrl.'/'.$method;
 
-        $curl = curl_init($this->apiUrl);
-
-        curl_setopt_array(
-            $curl,
-            array(
-                CURLOPT_HTTPHEADER      => array(
-                    'Content-Type: application/json',
-                    'Content-Length: '.strlen($json),
-                ),
-                CURLOPT_CUSTOMREQUEST   => 'POST',
-                CURLOPT_USERAGENT       => 'MilkyWay Client v.0.0.1',
-                CURLOPT_USERPWD         => $this->apiKey.':',
-                CURLOPT_RETURNTRANSFER  => true,
-                CURLOPT_POSTFIELDS      => $json,
-            )
+        $curlOpt = array(
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+            CURLOPT_USERAGENT       => 'MilkyWay Client v.0.0.1',
+            CURLOPT_USERPWD         => $this->apiKey.':',
+            CURLOPT_RETURNTRANSFER  => true
         );
+
+        if (null !== $request) {
+            $json = json_encode($request, JSON_PRETTY_PRINT);
+            $curlOpt[CURLOPT_CUSTOMREQUEST] = 'POST';
+            $curlOpt[CURLOPT_POSTFIELDS] = $json;
+            $curlOpt[CURLOPT_HTTPHEADER] = array(
+                'Content-Type: application/json',
+                'Content-Length: '.strlen($json),
+            );
+        }
+
+        curl_setopt_array($curl, $curlOpt);
 
         return json_decode(curl_exec($curl));
     }
