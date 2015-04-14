@@ -2,7 +2,7 @@
     "name": "wmorin/milky-way",
     "type": "library",
     "description": "MilkyWay is a PHP Library to interact with Telemetry API",
-    "keywords": ["dashboard", "metrics", "viz"],
+    "keywords": ["dashboard", "metrics", "viz", "telemetry", "telemetryapp"],
     "homepage": "https://github.com/wmorin/MilkyWay",
     "authors": [
         {
