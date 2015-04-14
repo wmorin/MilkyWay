@@ -54,4 +54,14 @@ class Account
     {
         return $this->plan;
     }
+
+    public static function getFromObj($obj)
+    {
+        $account = new Account();
+        $account->setId($obj->id);
+        $account->setName($obj->name);
+        $account->setPlan($obj->plan);
+
+        return $account;
+    }
 }

@@ -229,4 +229,22 @@ class Board
     {
         return $this->font_family;
     }
+
+    public static function getBoardFromResponse($response)
+    {
+        $board = new Board();
+        $board->setId($response->id);
+        $board->setName($response->name);
+        $board->setTheme($response->theme);
+        $board->setColumns($response->columns);
+        $board->setRows($response->rows);
+        $board->setAspectRatio($response->aspect_ratio);
+        $board->setDisplayBoardName($response->display_board_name);
+        $board->setWidgetMargins($response->widget_margins);
+        $board->setWidgetPadding($response->widget_padding);
+        $board->setSize($response->size);
+        $board->setFontSize($response->font_size);
+
+        return $board;
+    }
 }

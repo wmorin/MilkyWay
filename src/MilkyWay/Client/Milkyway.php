@@ -21,37 +21,26 @@ class Milkyway implements ClientInterface
 
     public function getAccount()
     {
-        $obj = $this->getApiResponse('account');
+        $obj = $this->getApiResponse('GET', 'account');
 
-        $account = new Account();
-        $account->setId($obj->id);
-        $account->setName($obj->name);
-        $account->setPlan($obj->plan);
+        return Account::getFromObj($obj);
+    }
 
-        return $account;
+    public function getBoard($id)
+    {
+        $obj = $this->getApiResponse('GET', 'boards/'.$id);
+
+        return Board::getFromObj($obj);
     }
 
     public function getBoards()
     {
-        $obj = $this->getApiResponse('boards');
+        $obj = $this->getApiResponse('GET', 'boards');
 
         $boards = array();
 
         foreach ($obj as $boardElt) {
-            $board = new Board();
-            $board->setId($boardElt->id);
-            $board->setName($boardElt->name);
-            $board->setTheme($boardElt->theme);
-            $board->setColumns($boardElt->columns);
-            $board->setRows($boardElt->rows);
-            $board->setAspectRatio($boardElt->aspect_ratio);
-            $board->setDisplayBoardName($boardElt->display_board_name);
-            $board->setWidgetMargins($boardElt->widget_margins);
-            $board->setWidgetPadding($boardElt->widget_padding);
-            $board->setSize($boardElt->size);
-            $board->setFontSize($boardElt->font_size);
-
-            array_push($boards, $board);
+            array_push($boards, Board::getFromObj($boardElt));
         }
 
         return $boards;
@@ -64,7 +53,7 @@ class Milkyway implements ClientInterface
         }
 
         $request = [ 'data' => $this->updates ];
-        $result = $this->getApiResponse('data', $request);
+        $result = $this->getApiResponse('POST', 'data', $request);
         $this->updates = array();
         $errors = $this->getErrors($result);
 
@@ -96,30 +85,34 @@ class Milkyway implements ClientInterface
         return $errors;
     }
 
-    protected function getApiResponse($method, $request = null)
+    protected function getApiResponse($method, $path, $request = null)
     {
-        $curl = curl_init($this->apiUrl.'/'.$method);
-        echo $this->apiUrl.'/'.$method;
-
+        $url = $this->apiUrl.'/'.$path;
+        $method = strtoupper($method);
         $curlOpt = array(
             CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
+                'Content-Type: application/json',
             ),
             CURLOPT_USERAGENT       => 'MilkyWay Client v.0.0.1',
             CURLOPT_USERPWD         => $this->apiKey.':',
-            CURLOPT_RETURNTRANSFER  => true
+            CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_CUSTOMREQUEST   => $method,
         );
 
         if (null !== $request) {
-            $json = json_encode($request, JSON_PRETTY_PRINT);
-            $curlOpt[CURLOPT_CUSTOMREQUEST] = 'POST';
-            $curlOpt[CURLOPT_POSTFIELDS] = $json;
-            $curlOpt[CURLOPT_HTTPHEADER] = array(
-                'Content-Type: application/json',
-                'Content-Length: '.strlen($json),
-            );
+            switch ($method) {
+                case 'POST':
+                    $json = json_encode($request, JSON_PRETTY_PRINT);
+                    $curlOpt[CURLOPT_POSTFIELDS] = $json;
+                    $curlOpt[CURLOPT_HTTPHEADER] = array(
+                        'Content-Type: application/json',
+                        'Content-Length: '.strlen($json),
+                    );
+                    break;
+            }
         }
 
+        $curl = curl_init($url);
         curl_setopt_array($curl, $curlOpt);
 
         return json_decode(curl_exec($curl));
