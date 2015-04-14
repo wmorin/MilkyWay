@@ -9,91 +9,91 @@ class Board
      *
      * @var int
      */
-    protected $id;
+    public $id;
 
     /**
      * Name of the board.
      *
      * @var string
      */
-    protected $name;
+    public $name;
 
     /**
      * Theme for the board.
      *
      * @var string
      */
-    protected $theme;
+    public $theme;
 
     /**
      * Number of columns in the board grid.
      *
      * @var int
      */
-    protected $columns;
+    public $columns;
 
     /**
      * Number of rows in the board grid.
      *
      * @var int
      */
-    protected $rows;
+    public $rows;
 
     /**
      * Native size of the board.
      *
      * @var array
      */
-    protected $size = [];
+    public $size = [];
 
     /**
      * Aspect ratio of the board.
      *
      * @var string
      */
-    protected $aspect_ratio;
+    public $aspect_ratio;
 
     /**
      * Whether to show the board name at the top of the board or not.
      *
      * @var boolean
      */
-    protected $display_board_name = false;
+    public $display_board_name = false;
 
     /**
      * Tag for the default channel for the board.
      *
      * @var string
      */
-    protected $channel_tag;
+    public $channel_tag;
 
     /**
      * External margin of a widget.
      *
      * @var int
      */
-    protected $widget_margins = 3;
+    public $widget_margins = 3;
 
     /**
      * Internal padding of a widget.
      *
      * @var int
      */
-    protected $widget_padding = 8;
+    public $widget_padding = 8;
 
     /**
      * Size of the font to use, can be 'small', 'normal' or 'large'.
      *
      * @var string
      */
-    protected $font_size;
+    public $font_size;
 
     /**
      * Font family to use.
      *
      * @var string
      */
-    protected $font_family = 'normal';
+    public $font_family = 'normal';
 
     public function setId($id)
     {

@@ -9,21 +9,21 @@ class Account
      *
      * @var string
      */
-    protected $id;
+    public $id;
 
     /**
      * Name of the account.
      *
      * @var string
      */
-    protected $name;
+    public $name;
 
     /**
      * Plan of the account.
      *
      * @var string
      */
-    protected $plan;
+    public $plan;
 
     public function setId($id)
     {
